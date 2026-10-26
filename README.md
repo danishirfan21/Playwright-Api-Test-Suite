@@ -74,4 +74,4 @@ Each is asserted with the correct behavior and `test.fail`. The test passes whil
 
 ## CI
 
-`.github/workflows/ci.yml` runs on pull requests and pushes to main. The lint and typecheck job runs first, then the test job. The HTML report is uploaded as an artifact when the test job fails.
+`.github/workflows/ci.yml` runs on pull requests, pushes to main, manual dispatch, and nightly at 03:00 UTC. The nightly run exists because the target is a public API: when Restful-Booker fixes a documented defect, its `test.fail` test turns red and the marker can be removed. The lint and typecheck job runs first, then the test job. The HTML report is uploaded as an artifact when the test job fails.

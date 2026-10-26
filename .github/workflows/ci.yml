@@ -4,6 +4,10 @@ on:
   pull_request:
   push:
     branches: [main]
+  schedule:
+    # Nightly at 03:00 UTC, so a fixed or changed API behavior shows up as a red run.
+    - cron: '0 3 * * *'
+  workflow_dispatch:
 
 jobs:
   static-checks:
