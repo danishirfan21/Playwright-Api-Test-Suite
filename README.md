@@ -1,8 +1,8 @@
 # Restful-Booker API test suite
 
-[![CI](https://github.com/OWNER/REPO/actions/workflows/ci.yml/badge.svg)](https://github.com/OWNER/REPO/actions/workflows/ci.yml)
+[![CI](https://github.com/danishirfan21/Playwright-Api-Test-Suite/actions/workflows/ci.yml/badge.svg)](https://github.com/danishirfan21/Playwright-Api-Test-Suite/actions/workflows/ci.yml)
 
-API tests for [Restful-Booker](https://restful-booker.herokuapp.com) written in TypeScript with Playwright's `APIRequestContext`. No browser is involved. Replace `OWNER/REPO` in the badge with the real repository path after the first push.
+API tests for [Restful-Booker](https://restful-booker.herokuapp.com) written in TypeScript with Playwright's `APIRequestContext`. No browser is involved.
 
 ## What is covered
 
