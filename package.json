@@ -1,0 +1,26 @@
+{
+  "name": "restful-booker-api-tests",
+  "version": "1.0.0",
+  "private": true,
+  "description": "Playwright APIRequestContext test suite for Restful-Booker",
+  "scripts": {
+    "test": "playwright test",
+    "test:report": "playwright show-report",
+    "typecheck": "tsc --noEmit",
+    "lint": "eslint .",
+    "check": "npm run typecheck && npm run lint"
+  },
+  "devDependencies": {
+    "@eslint/js": "10.0.1",
+    "@faker-js/faker": "10.6.0",
+    "@playwright/test": "1.64.1",
+    "@types/node": "20.19.43",
+    "ajv": "8.20.0",
+    "ajv-formats": "3.0.1",
+    "dotenv": "18.0.9",
+    "eslint": "10.13.0",
+    "eslint-plugin-playwright": "2.12.1",
+    "typescript": "6.0.3",
+    "typescript-eslint": "8.72.1"
+  }
+}
