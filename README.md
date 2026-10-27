@@ -1,6 +1,8 @@
 # Restful-Booker API test suite
 
-[![CI](https://github.com/danishirfan21/Playwright-Api-Test-Suite/actions/workflows/ci.yml/badge.svg)](https://github.com/danishirfan21/Playwright-Api-Test-Suite/actions/workflows/ci.yml)
+[![CI](https://github.com/danishirfan21/Playwright-Api-Test-Suite/actions/workflows/ci.yml/badge.svg?branch=main&event=push)](https://github.com/danishirfan21/Playwright-Api-Test-Suite/actions/workflows/ci.yml)
+
+See also: [Playwright-Automation-Framework](https://github.com/danishirfan21/Playwright-Automation-Framework), the SauceDemo UI automation suite.
 
 API tests for [Restful-Booker](https://restful-booker.herokuapp.com) written in TypeScript with Playwright's `APIRequestContext`. No browser is involved.
 
@@ -21,6 +23,12 @@ API tests for [Restful-Booker](https://restful-booker.herokuapp.com) written in 
 - Error bodies from this API are plain text, so error cases assert status codes only.
 - Nothing is asserted that was not observed first. See [docs/api-behavior.md](docs/api-behavior.md) for the probe results.
 - Each test creates its own booking through a fixture and the fixture deletes it in teardown. No test relies on another test or on seeded data, so periodic resets of the public server are harmless and tests run in parallel.
+
+## How this was built
+
+- Probe first: every assertion is based on real responses recorded in [docs/api-behavior.md](docs/api-behavior.md) before any test was written.
+- Known API bugs are documented defects (D1 to D6). Each is asserted with the correct behavior and marked `test.fail(true, reason)`, so the suite stays green today and goes red if the API is fixed.
+- Built with Claude Code, which is credited as co-author in the commit history.
 
 ## Run it
 
