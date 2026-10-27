@@ -2,6 +2,8 @@
 
 [![CI](https://github.com/danishirfan21/Playwright-Api-Test-Suite/actions/workflows/ci.yml/badge.svg?branch=main&event=push)](https://github.com/danishirfan21/Playwright-Api-Test-Suite/actions/workflows/ci.yml)
 
+[Playwright-Api-Test-Suite](https://github.com/danishirfan21/Playwright-Api-Test-Suite): the Restful-Booker API test suite.
+
 See also: [Playwright-Automation-Framework](https://github.com/danishirfan21/Playwright-Automation-Framework), the SauceDemo UI automation suite.
 
 API tests for [Restful-Booker](https://restful-booker.herokuapp.com) written in TypeScript with Playwright's `APIRequestContext`. No browser is involved.
