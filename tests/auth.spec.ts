@@ -1,6 +1,7 @@
 import { test, expect } from '../fixtures';
 import { authRejectedSchema, authTokenSchema } from '../schemas';
 import { env } from '../utils/env';
+import { expectKnownDefect } from '../utils/knownDefect';
 import { expectMatchesSchema } from '../utils/expectMatchesSchema';
 
 test.describe('POST /auth', () => {
@@ -18,11 +19,10 @@ test.describe('POST /auth', () => {
     expect(await response.json()).toEqual({ reason: 'Bad credentials' });
   });
 
-  test('DEFECT D1: rejected credentials should return 401, not 200', async ({ authClient }) => {
-    test.fail(true, 'D1: the API answers 200 with {reason} for bad credentials');
-
+  test('D1: rejected credentials return 200 instead of 401', async ({ authClient }) => {
     const response = await authClient.login(env.username, 'not-the-password');
 
-    expect(response.status()).toBe(401);
+    // The body is covered by the previous test, so only the status is the defect here.
+    await expectKnownDefect(response, { id: 'D1', observedStatus: 200, expectedStatuses: [400, 401] });
   });
 });

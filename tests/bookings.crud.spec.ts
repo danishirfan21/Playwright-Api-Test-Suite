@@ -1,6 +1,7 @@
 import { randomUUID } from 'node:crypto';
 import { test, expect } from '../fixtures';
 import { bookingIdListSchema, bookingSchema, createdBookingSchema } from '../schemas';
+import { expectKnownDefect } from '../utils/knownDefect';
 import { expectMatchesSchema } from '../utils/expectMatchesSchema';
 
 function shiftDay(isoDate: string, days: number): string {
@@ -125,15 +126,11 @@ test.describe('delete', () => {
     expect(reread.status()).toBe(404);
   });
 
-  test('DEFECT D2: successful delete should return 200 or 204, not 201', async ({
-    bookingClient,
-    createdBooking,
-    token,
-  }) => {
-    test.fail(true, 'D2: the API answers 201 Created for a successful DELETE');
-
+  test('D2: successful delete returns 201 instead of 200 or 204', async ({ bookingClient, createdBooking, token }) => {
     const response = await bookingClient.delete(createdBooking.bookingid, token);
 
-    expect([200, 204]).toContain(response.status());
+    await expectKnownDefect(response, { id: 'D2', observedStatus: 201, observedBody: 'Created', expectedStatuses: [200, 204] });
+    // The delete itself must still work, otherwise this is not just a status quirk.
+    expect((await bookingClient.get(createdBooking.bookingid)).status()).toBe(404);
   });
 });

@@ -34,9 +34,19 @@ export const test = base.extend<TestFixtures>({
   trackBooking: async ({ bookingClient, token }, use) => {
     const ids = new Set<number>();
     await use((id) => ids.add(id));
-    // Teardown tolerates ids a test already deleted (the API answers 405 for those).
+    // Teardown runs even when the test body failed. Ids a test already deleted are
+    // fine (the API answers 405, see D6; 404 is accepted in case that gets fixed).
+    // Any other outcome is reported as an annotation instead of failing an
+    // otherwise valid test over cleanup, but it stays visible in the report.
     for (const id of ids) {
-      await bookingClient.delete(id, token);
+      try {
+        const response = await bookingClient.delete(id, token);
+        if (![200, 201, 204, 404, 405].includes(response.status())) {
+          base.info().annotations.push({ type: 'cleanup-failed', description: `booking ${id}: HTTP ${response.status()}` });
+        }
+      } catch (error) {
+        base.info().annotations.push({ type: 'cleanup-failed', description: `booking ${id}: ${String(error)}` });
+      }
     }
   },
 
